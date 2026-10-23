@@ -1,0 +1,82 @@
+{
+  "title": "RowBrief · CSV handoff checker",
+  "shortDescription": "Inspect CSVs locally. Compare delimiters, locate issues and share a report without cell values. Free MIT source.",
+  "type": "Tool",
+  "techStack": [
+    "javascript",
+    "html",
+    "css"
+  ],
+  "domains": [
+    "Productivity"
+  ],
+  "documentation": "Full",
+  "maintenance": "None",
+  "descriptionFile": "description.md",
+  "liveDemoUrl": "https://aryarashid.github.io/rowbrief/",
+  "repositoryUrl": "https://github.com/aryarashid/rowbrief",
+  "faq": [
+    {
+      "question": "What is RowBrief for?",
+      "answer": "Understanding a CSV structure before handing it to someone else, with explicit parsing choices and a report that omits cell values."
+    },
+    {
+      "question": "Does my file leave the browser?",
+      "answer": "The app reads it locally and makes no upload or analytics request. It saves no file, report or preference to browser storage. Hosting still receives ordinary page requests."
+    },
+    {
+      "question": "What does a report include?",
+      "answer": "Delimiter/header/blank-record choices, BOM and line-ending metadata, counts and generic findings with source locations. Cell values, header names, source excerpts and filename are omitted. Counts/locations remain; review before sharing."
+    },
+    {
+      "question": "Can it fix or convert a file?",
+      "answer": "No. The on-disk original is never modified, and no cleaned CSV or encoding conversion is exported. Files must be valid UTF-8."
+    },
+    {
+      "question": "What are the limits?",
+      "answer": "2 MiB, 10,000 parsed records including blanks, 100 fields per record, first 200 findings, and 20 preview records per page. Cell display is clipped to 200 characters."
+    },
+    {
+      "question": "What is not checked?",
+      "answer": "Business rules, data types, formula safety and universal spreadsheet compatibility. Values render as text. A structural pass does not certify data quality or safety."
+    },
+    {
+      "question": "How do I run and license it?",
+      "answer": "Use the free hosted tool or Node.js 22+, npm ci and npm start. Original code, docs, examples and artwork use MIT. No paid service, account or key is required. Community support has no response-time promise."
+    }
+  ],
+  "images": [
+    {
+      "file": "images/01-cover.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Actual RowBrief workbench with a synthetic clean CSV and three data records."
+    },
+    {
+      "file": "images/02-dialects.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Comma, semicolon, tab and pipe comparison for a synthetic semicolon CSV."
+    },
+    {
+      "file": "images/03-findings.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Actual findings identify two and four fields against the expected three."
+    },
+    {
+      "file": "images/04-report.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Actual content-omitting handoff report with counts and explicit parsing choices."
+    },
+    {
+      "file": "images/05-preview.jpg",
+      "width": 1600,
+      "height": 900,
+      "alt": "Actual preview shows a quoted comma and a cell spanning physical lines three and four."
+    }
+  ],
+  "status": "Prepared; not published to Zero to Hundred",
+  "publicationNotes": "No price is set or inferred from TempoFold. Verify arashid@revrnt.com / aryarashid and current listing eligibility. Stop before any new consequential agreement or ownership attestation. Public GitHub publication is separate from a marketplace listing."
+}

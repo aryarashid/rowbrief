@@ -1,0 +1,2 @@
+import {PANELS} from './panels.js';
+for(const panel of PANELS){const figure=document.createElement('figure'),link=document.createElement('a'),img=document.createElement('img'),caption=document.createElement('figcaption');link.href='./images/'+panel.file;img.src=link.href;img.alt=panel.images.map(i=>i.alt).join(' ');img.width=1600;img.height=900;img.loading='lazy';caption.textContent=panel.title;link.append(img);figure.append(link,caption);document.getElementById('gallery').append(figure);}

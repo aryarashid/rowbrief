@@ -1,0 +1,7 @@
+node_modules/
+output/
+.playwright-mcp/
+.DS_Store
+.env
+.env.*
+*.log

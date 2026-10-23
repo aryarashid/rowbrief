@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RowBrief · CSV handoff checker</title>
+  <meta name="description" content="Understand a CSV before handing it over. Compare delimiters, locate structural problems and export a report without uploading your file.">
+  <meta name="theme-color" content="#3547be">
+  <meta property="og:title" content="RowBrief · Make the next handoff clearer">
+  <meta property="og:description" content="A local CSV workbench. Explicit parsing choices, source-line diagnostics and reports without cell values. Free MIT source.">
+  <meta property="og:image" content="https://aryarashid.github.io/rowbrief/marketplace/images/01-cover.jpg">
+  <link rel="icon" href="./brand/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip" href="#workspace">Skip to workspace</a>
+  <header class="site-header">
+    <a class="brand" href="./"><img src="./brand/mark.svg" alt="" width="38" height="38"><span>RowBrief</span></a>
+    <span class="product-name">CSV handoff checker</span>
+    <nav aria-label="Project"><a href="#guide">How it works</a><a href="https://github.com/aryarashid/rowbrief">MIT source</a></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <div><h1>Make the next<br>handoff clearer.</h1><p>Understand the CSV in front of you.<br>Explain its structure before it travels.</p></div>
+      <div class="privacy-note"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="3"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><div><strong>Your file stays here.</strong><p>Read in this tab. No upload, account or saved browser copy. Refreshing clears your work.</p></div></div>
+    </section>
+    <section id="workspace" class="workspace" aria-label="CSV workspace">
+      <div class="input-panel">
+        <div class="panel-heading"><h2>Start with a file</h2><span>UTF-8 · up to 2 MiB</span></div>
+        <div id="dropzone" class="dropzone"><label for="file" class="file-label">Choose a CSV or text file<input id="file" type="file" accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values,text/plain"></label><p>Or drop one file here. It is read locally.</p></div>
+        <label for="example">Explore a synthetic example</label>
+        <select id="example"><option value="">Choose an example…</option></select>
+        <p class="small sample-link"><a href="./examples/clean-handoff.csv" download>Download a sample CSV</a> to try the file workflow.</p>
+        <label for="csv">Or paste CSV text</label>
+        <textarea id="csv" spellcheck="false" placeholder="item,owner,status&#10;Field guide,Mina,Ready" aria-describedby="paste-note"></textarea>
+        <p id="paste-note" class="small">Files retain their original line endings until edited. Pasted or edited text uses browser-normalized LF newlines. Changes need another inspection.</p>
+        <fieldset><legend>Parsing choices</legend>
+          <label for="delimiter">Delimiter</label><select id="delimiter"><option value=",">Comma (,)</option><option value=";">Semicolon (;)</option><option value="&#9;">Tab</option><option value="|">Pipe (|)</option></select>
+          <label class="check"><input id="header" type="checkbox" checked>First included record is a header</label>
+          <label class="check"><input id="blank" type="checkbox" checked>Skip whitespace-only records</label>
+        </fieldset>
+        <div class="actions"><button id="inspect" class="primary">Inspect CSV</button><button id="clear" class="quiet">Clear</button></div>
+        <p id="status" class="status" role="status" aria-live="polite">Choose an example, a file or paste text to begin.</p>
+        <p id="error" class="error" role="alert" hidden></p>
+      </div>
+      <div class="result-panel" id="results" aria-label="Inspection results" aria-busy="false">
+        <div id="empty" class="empty"><div class="empty-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><h2>Every handoff starts<br>with a shared understanding.</h2><p>Inspect a file to see the record shape, compare parsing choices and locate problems.</p><button id="try-example" class="secondary">Try the clean example</button></div>
+        <div id="output" hidden>
+          <div class="result-heading"><div><h2 id="result-title" tabindex="-1">Inspection</h2><p id="source-label" class="small"></p></div><span id="verdict" class="verdict"></span></div>
+          <div class="summary" aria-label="Structure summary"><div><strong id="record-count"></strong><span>data records</span></div><div><strong id="field-count"></strong><span>expected fields</span></div><div><strong id="issue-count"></strong><span>findings</span></div></div>
+          <p id="parse-note" class="small"></p>
+          <details class="dialects" open><summary>Compare delimiters</summary><p class="small">No automatic choice. A one-column result can be valid or use the wrong delimiter.</p><div class="dialect-grid" id="dialect-grid"></div></details>
+          <section class="findings-section"><h3>Findings</h3><p id="findings-intro" class="small"></p><ol id="findings" class="findings"></ol></section>
+          <section id="context-panel" class="context-panel" hidden><div class="panel-heading"><h3 id="context-heading">Source context</h3><button id="close-context" class="quiet">Hide context</button></div><p class="small">Original text around this physical source line. Included here for inspection; omitted from reports.</p><pre id="context" tabindex="0" aria-labelledby="context-heading"></pre></section>
+          <section class="preview"><div class="panel-heading"><h3>Record preview</h3><span id="page-label" class="small"></span></div><p class="small">Cell contents render as text. Quotes and multiline fields are parsed; values are not evaluated.</p><div class="table-scroll" role="region" aria-label="CSV preview table, scroll horizontally for more fields" tabindex="0"><table id="preview-table"></table></div><div class="paging"><button id="previous" class="secondary">Previous</button><span id="range" class="small"></span><button id="next" class="secondary">Next</button></div></section>
+          <section class="handoff"><div><h3>Hand over the structure.</h3><p>Download parsing choices, counts and findings. Cell values, header names, source excerpts and the filename are omitted.</p></div><div class="actions"><button id="json" class="secondary">Download JSON report</button><button id="markdown" class="secondary">Download Markdown report</button><button id="report-preview" class="quiet">Preview report</button></div><pre id="report-content" tabindex="0" aria-label="Report preview without cell values" hidden></pre><p class="small">Counts and source locations remain. This is a structural check, not a data-quality or spreadsheet-safety certificate.</p></section>
+        </div>
+      </div>
+    </section>
+    <section id="guide" class="guide"><h2>A clear read, not a silent repair.</h2><div class="guide-columns"><div><h3>Choose the interpretation</h3><p>CSV dialects vary. Pick a delimiter, decide whether there is a header and compare the results. Quoted newlines and doubled quotes are supported.</p></div><div><h3>Keep the original intact</h3><p>RowBrief checks structure only. It does not correct data, infer types or execute formulas. Fatal quoting or size errors stop inspection; partial results are labeled.</p></div><div><h3>Share a smaller report</h3><p>The report omits content and names. Review it before sharing. No files, reports or preferences are stored by the app.</p></div></div><details><summary>Limits and practical details</summary><p>Strict UTF-8 only, with or without BOM. Up to 2 MiB, 10,000 parsed records and 100 fields per record; only the first 200 findings are listed. Blank records still count toward the record limit. Source lines and columns are one-based; columns count Unicode code points. CRLF is one line break. A leading BOM is excluded from visible column positions.</p><p>Headers are checked for empty values and exact duplicates. Field counts are compared with the first included record even when the header option is off. No business-rule, data-type, encoding-conversion, formula-safety or universal spreadsheet-compatibility check is provided. A first page load requires a connection unless you serve your own local copy. No offline cache is installed.</p></details></section>
+  </main>
+  <footer><a class="brand" href="./"><img src="./brand/mark.svg" width="26" height="26" alt=""><span>RowBrief</span></a><p>Original MIT software by <a href="https://github.com/aryarashid">Arya Rashid</a>, built with AI assistance.</p><a href="https://github.com/aryarashid/rowbrief/issues">Issues &amp; contributions</a></footer>
+</body>
+</html>

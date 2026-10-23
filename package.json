@@ -1,0 +1,14 @@
+{
+  "name": "rowbrief",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Understand a CSV and hand over its structure, without uploading its contents.",
+  "license": "MIT",
+  "engines": {"node": ">=22"},
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test test/*.test.js",
+    "check": "node --check src/core.js && node --check src/app.js && node --check server.mjs && npm test"
+  }
+}
