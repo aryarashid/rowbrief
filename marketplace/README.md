@@ -8,4 +8,4 @@ Original app, artwork, captures, examples and docs use MIT. No third-party fonts
 
 The official no-key prefill link is in `prefill-url.txt`. It seeds public title, short copy, demo, repository and category fields; it does not create a listing, set a price, attach source, upload images or accept terms. Remaining long copy, FAQs and images are in this package.
 
-This is a pre-release package: the final focused test rerun, remaining browser checks and public deployment verification are pending the Mac resource guard. Do not treat the prepared demo/repository URLs as verified published URLs.
+The final focused suite and local browser checks passed; see docs/verification.md. Public GitHub/demo publication is verified separately in the release record. This package remains prepared for Zero to Hundred, with no marketplace fields saved or published.

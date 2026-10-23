@@ -2,8 +2,6 @@
 
 # RowBrief
 
-> Pre-release snapshot prepared October 23, 2026. No GitHub/demo or marketplace publication is claimed yet. See [verification](./docs/verification.md) for remaining checks.
-
 **Make the next handoff clearer.** A local CSV workbench that explains a file's structure before you pass it on. Compare delimiters, find the physical source line behind a structural problem, and export a report without cell values.
 
 [Open the live tool](https://aryarashid.github.io/rowbrief/) · [Product gallery](https://aryarashid.github.io/rowbrief/marketplace/) · [Run locally](#run-locally) · [Contribution guide](./CONTRIBUTING.md)
