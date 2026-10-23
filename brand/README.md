@@ -5,3 +5,5 @@ The mark is a compact record grid: rows, a field column and a mint location dot.
 `mark.svg` is the original square logo and favicon. The wordmark is ordinary RowBrief text in Trebuchet MS with system sans-serif fallbacks. Font files are not bundled. The brand is designed for readable source inspection and handoff, with no decorative motion.
 
 Use actual product screenshots with synthetic examples. Do not invent customer results, testimonials, throughput or security certification. Original artwork is MIT licensed; availability does not imply endorsement of another product.
+
+`wordmark.svg` and `wordmark-reversed.svg` pair the grid mark with editable text for light and dark backgrounds. They use installed fonts and contain no embedded font binary. Keep their aspect ratio.
